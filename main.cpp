@@ -3,14 +3,13 @@
 #include <stdlib.h>
 
 #include "config.h"
-#include "MainLoop.h"
 #include "Display.h"
 #include "Reshape.h"
 
 int main(int argc, char** argv)
 {
 	glutInit (&argc, argv);
-	glutInitWindowSize (App::Width, App::Height);
+	glutInitWindowSize (AppConfig::Width, AppConfig::Height);
 	glutInitDisplayMode ( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow ("Game of Chips");
 

@@ -1,4 +1,5 @@
-static class AppConfig
+#pragma once
+class AppConfig
 {
 public:
 	static int Width;
