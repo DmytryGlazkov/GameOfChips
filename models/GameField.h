@@ -63,7 +63,7 @@ public:
 		
 		glColor3f(0, 0, 0);
 		glPushMatrix();
-		glTranslatef((float)-(AppConfig::GameFieldWidth + 2) / 2, (float)(AppConfig::GameFieldHeight + 2) / 2, 0);
+		glTranslatef((float)-AppConfig::GameFieldWidth / 2, (float)(AppConfig::GameFieldHeight + 2) / 2, 0);
 		glBegin(GL_QUADS);
 			glVertex3f(0, 0, 0);
 			glVertex3f(AppConfig::GameFieldWidth + 1, 0, 0);

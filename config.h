@@ -10,11 +10,13 @@ public:
 	static float ScreenBorderY;
 	static float FieldBorderX;
 	static float FieldBorderY;
+	static float StartZoneX;
+	static float StartZoneY;
 };
 
 int AppConfig::Width  = 800;
 int AppConfig::Height = 600;
-int AppConfig::GameFieldWidth = 6;
+int AppConfig::GameFieldWidth = 18;
 int AppConfig::GameFieldHeight = 7;
 float AppConfig::ScreenBorderX = (float)(AppConfig::GameFieldWidth + 1) / 2;
 float AppConfig::ScreenBorderY = (float)(AppConfig::GameFieldHeight + 1) / 2;

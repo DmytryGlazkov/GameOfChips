@@ -54,7 +54,7 @@ public:
 		if (destinationX < 0 || destinationX >= AppConfig::GameFieldWidth)
 			destinationX = positionX;
 		destinationY += y;
-		if (destinationY < 0 || destinationY > AppConfig::GameFieldWidth)
+		if (destinationY < 0 || destinationY >= AppConfig::GameFieldHeight)
 			destinationY = positionY;
 
 		//if (Field->CheckField(this))
