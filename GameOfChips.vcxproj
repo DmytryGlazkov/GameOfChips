@@ -68,7 +68,8 @@
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="Display.h" />
-    <ClInclude Include="GameField.h" />
+    <ClInclude Include="models\Chip.h" />
+    <ClInclude Include="models\GameField.h" />
     <ClInclude Include="Reshape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
