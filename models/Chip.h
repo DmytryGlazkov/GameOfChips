@@ -40,7 +40,7 @@ public:
 	void Draw()
 	{
 		glPushMatrix();
-		glTranslatef(-(AppConfig::GameFieldWidth) / 2  + currentX, (AppConfig::GameFieldHeight) / 2 - currentY, 0);
+		glTranslatef(-AppConfig::FieldBorderX  + currentX, AppConfig::FieldBorderY - currentY, 0);
 
 		glColor3f(1, 0, 1);
 

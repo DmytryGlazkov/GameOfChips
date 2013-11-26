@@ -37,9 +37,9 @@ public:
 		
 		glPushMatrix();
 
-		glTranslatef(-(AppConfig::GameFieldWidth + 2) / 2, -(AppConfig::GameFieldHeight + 2) / 2, 0);
+		glTranslatef(-AppConfig::ScreenBorderX, -AppConfig::ScreenBorderY, 0);
 
-		for (float i = (float)-(AppConfig::GameFieldHeight + 2) / 2 ; i < (float)(AppConfig::GameFieldHeight + 4) / 2; i++)
+		for (int i = 0 ; i < AppConfig::GameFieldHeight + 3; i++)
 		{
 			glutSolidCube(1);
 			glTranslatef(AppConfig::GameFieldWidth + 1, 0, 0);
@@ -50,8 +50,8 @@ public:
 		glPopMatrix();
 
 		glPushMatrix();
-		glTranslatef(-(AppConfig::GameFieldWidth + 2) / 2, -(AppConfig::GameFieldHeight + 2) / 2, 0);
-		for (float i = -(float)(AppConfig::GameFieldWidth + 2) / 2 ; i < (float)(AppConfig::GameFieldWidth + 2) / 2; i++)
+		glTranslatef(-AppConfig::ScreenBorderX, -AppConfig::ScreenBorderY, 0);
+		for (int i = 0 ; i < AppConfig::GameFieldWidth + 2; i++)
 		{
 			glutSolidCube(1);
 			glTranslatef(0, AppConfig::GameFieldHeight + 2, 0);
@@ -60,7 +60,7 @@ public:
 			glTranslatef(1, 0, 0);
 		}
 		glPopMatrix();
-
+		
 		glColor3f(0, 0, 0);
 		glPushMatrix();
 		glTranslatef((float)-(AppConfig::GameFieldWidth + 2) / 2, (float)(AppConfig::GameFieldHeight + 2) / 2, 0);
@@ -71,8 +71,8 @@ public:
 			glVertex3f(0, -1.1, 0);
 		glEnd();
 		glPopMatrix();
-
 		
+
 		/*glLoadIdentity();
 		glTranslatef(-(AppConfig::GameFieldWidth) / 2, 0, -10);
 
