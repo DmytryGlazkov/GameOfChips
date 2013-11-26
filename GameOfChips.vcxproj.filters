@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Заголовочные файлы\Models">
+      <UniqueIdentifier>{94e572d7-dd75-49d6-82bf-3d20bf0fa41e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,11 +32,11 @@
     <ClInclude Include="Reshape.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="GameField.h">
-      <Filter>Заголовочные файлы</Filter>
+    <ClInclude Include="models\Chip.h">
+      <Filter>Заголовочные файлы\Models</Filter>
     </ClInclude>
-    <ClInclude Include="Chip.h">
-      <Filter>Заголовочные файлы</Filter>
+    <ClInclude Include="models\GameField.h">
+      <Filter>Заголовочные файлы\Models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

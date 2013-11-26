@@ -1,7 +1,7 @@
 #pragma once
-#include "libs/OpenGL/glut.h"
+#include "../libs/OpenGL/glut.h"
 
-#include "config.h"
+#include "../config.h"
 
 class Chip
 {

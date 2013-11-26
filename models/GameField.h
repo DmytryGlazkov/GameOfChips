@@ -1,10 +1,10 @@
 #pragma once
-#include "libs/OpenGL/glut.h"
+#include "../libs/OpenGL/glut.h"
 #include <vector>
 
 using namespace std;
 
-#include "config.h"
+#include "../config.h"
 #include "Chip.h"
 
 class GameField
@@ -33,7 +33,7 @@ public:
 			glTranslatef(AppConfig::GameFieldWidth + 1, 0, 0);
 			glutSolidCube(1);
 			glTranslatef(-(AppConfig::GameFieldWidth + 1), 0, 0);
-			glTranslatef(0, 1.1, 0);
+			glTranslatef(0, 1, 0);
 		}
 		glPopMatrix();
 
@@ -45,7 +45,7 @@ public:
 			glTranslatef(0, AppConfig::GameFieldHeight + 2, 0);
 			glutSolidCube(1);
 			glTranslatef(0, -(AppConfig::GameFieldHeight + 2), 0);
-			glTranslatef(1.1, 0, 0);
+			glTranslatef(1, 0, 0);
 		}
 		glPopMatrix();
 
@@ -55,8 +55,8 @@ public:
 		glBegin(GL_QUADS);
 			glVertex3f(0, 0, 0);
 			glVertex3f(AppConfig::GameFieldWidth + 1, 0, 0);
-			glVertex3f(AppConfig::GameFieldWidth + 1, -1, 0);
-			glVertex3f(0, -1, 0);
+			glVertex3f(AppConfig::GameFieldWidth + 1, -1.1, 0);
+			glVertex3f(0, -1.1, 0);
 		glEnd();
 		glPopMatrix();
 
