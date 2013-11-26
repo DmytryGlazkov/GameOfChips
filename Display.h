@@ -1,5 +1,6 @@
 #pragma once
 #include "Models/GameField.h"
+
 void Display()
 {
 	glClearColor(1, 1, 1, 1);
@@ -13,4 +14,5 @@ void Display()
 	//glutSolidCube(1);
 
 	glutSwapBuffers();
+	glutPostRedisplay();
 };

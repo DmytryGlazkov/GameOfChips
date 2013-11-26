@@ -15,7 +15,19 @@ public:
 		width = AppConfig::GameFieldWidth;
 		height = AppConfig::GameFieldHeight;
 
-		chips.push_back((new Chip()));
+		CurrentChip = new Chip();
+		chips.push_back(CurrentChip);
+	}
+
+	Chip* CurrentChip;
+
+	void Update()
+	{
+		if (CurrentChip->IsSettedUp())
+		{
+			CurrentChip = new Chip();
+			chips.push_back(CurrentChip);
+		}
 	}
 
 	void DrawField()
@@ -99,6 +111,27 @@ public:
 			chips[i]->Draw();
 		}
 		glPopMatrix();
+	}
+
+	bool CheckField(Chip* chip)
+	{
+		POINT destination = chip->GetDestination();
+		for (int i = 0; i < chips.size(); i++)
+		{
+			if (chips[i]->GetPosition().x == destination.x && chips[i]->GetPosition().y == destination.y)
+				return false;
+		}
+		return true;
+	}
+
+	void PushChip(Chip* chip)
+	{
+		chips.push_back(chip);
+	}
+
+	vector<Chip*> GetChips()
+	{
+		return chips;
 	}
 private:
 	int width;

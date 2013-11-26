@@ -68,9 +68,11 @@
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="models\Chip.h" />
     <ClInclude Include="models\GameField.h" />
     <ClInclude Include="Reshape.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
