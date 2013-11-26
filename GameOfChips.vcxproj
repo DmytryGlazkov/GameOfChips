@@ -66,6 +66,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chip.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="GameField.h" />
