@@ -22,8 +22,22 @@ void KeyboardSpecialKeys(int key, int x, int y)
 		Field->CurrentChip->Move(1, 0);
 		break;
 	case GLUT_KEY_DOWN:
-		Field->CurrentChip->Move(0, 1);
+		{
+			int bottom = AppConfig::GameFieldHeight;
+			for (int i = 0; i < Field->GetChips().size();i++)
+			{
+				if (Field->GetChips()[i]->GetPosition().x == Field->CurrentChip->GetDestination().x && 
+					Field->GetChips()[i] != Field->CurrentChip)
+				{
+					if (Field->GetChips()[i]->GetPosition().y < bottom)
+						bottom = Field->GetChips()[i]->GetPosition().y;
+				}
+			}
+			Field->CurrentChip->Bottom = bottom;
+			Field->CurrentChip->Move(0, bottom);
+			Field->CurrentChip->IsMoved = true;
 		break;
+		}
 	case GLUT_KEY_UP:
 		Field->CurrentChip->Move(0, -1);
 		break;

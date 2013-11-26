@@ -8,7 +8,7 @@ void Display()
 
 	glLoadIdentity();
 	//glTranslatef(-AppConfig::GameFieldWidth / 2, -AppConfig::GameFieldHeight / 2, -10);
-	gluLookAt(0, -5, 9 + AppConfig::GameFieldWidth/4*3, 0, 0, 0, 0, 1, 0);
+	gluLookAt(0, 0, 9 + AppConfig::GameFieldWidth/4*3, 0, 0, 0, 0, 1, 0);
 	//glTranslatef(0, 0, -(6 + AppConfig::GameFieldWidth));
 	Field->DrawField();
 	//glutSolidCube(1);

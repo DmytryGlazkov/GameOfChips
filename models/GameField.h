@@ -1,6 +1,9 @@
+class GameField;
+
 #pragma once
 #include "../libs/OpenGL/glut.h"
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -15,19 +18,32 @@ public:
 		width = AppConfig::GameFieldWidth;
 		height = AppConfig::GameFieldHeight;
 
-		CurrentChip = new Chip();
+		CurrentChip = (new Chip())->Color(AppConfig::FirstPlayerColor);
 		chips.push_back(CurrentChip);
+
+		AppConfig::IsFirstPlayerStep = false;
 	}
 
 	Chip* CurrentChip;
 
+	bool IsChipSettedUp()
+	{
+		/*if (CurrentChip->GetPosition().y >= AppConfig::GameFieldHeight - 1)
+			return true;
+		return false;*/
+		return CurrentChip->IsSetted;
+	}
+
 	void Update()
 	{
-		if (CurrentChip->IsSettedUp())
+		if (IsChipSettedUp())
 		{
-			CurrentChip = new Chip();
+			CurrentChip = (new Chip())->Color(AppConfig::IsFirstPlayerStep ? AppConfig::FirstPlayerColor :   AppConfig::SecondPlayerColor);
 			chips.push_back(CurrentChip);
+
+			AppConfig::IsFirstPlayerStep = !AppConfig::IsFirstPlayerStep;
 		}
+		cout << CurrentChip->GetPosition().y;
 	}
 
 	void DrawField()
