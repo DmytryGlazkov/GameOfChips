@@ -13,5 +13,7 @@ void Timer(int id)
 		chips[i]->Update();
 	}
 
+	Field->Update();
+
 	glutTimerFunc(1000 / 24, Timer, 0);
 }

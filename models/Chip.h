@@ -12,7 +12,8 @@ public:
 		positionX = destinationX = currentX = 0;
 		positionY = destinationY = currentY = -1;
 		speedKoef = 5;
-		destinationX = 3;
+		IsMoved = false;
+		IsSetted = false;
 	}
 
 	Chip(int x, int y)
@@ -20,6 +21,11 @@ public:
 		positionX = destinationX = currentX = x;
 		positionY = destinationY = currentY = y;
 	}
+
+	int Bottom;
+	bool IsSetted;
+
+	bool IsMoved;
 
 	void Update()
 	{
@@ -34,15 +40,16 @@ public:
 		else
 		{
 			currentY = destinationY;
+			if (IsMoved)IsSetted = true;
 		}
 	}
 
 	void Draw()
 	{
 		glPushMatrix();
-		glTranslatef(-(AppConfig::GameFieldWidth) / 2  + currentX, (AppConfig::GameFieldHeight) / 2 - currentY, 0);
+		glTranslatef(-AppConfig::FieldBorderX  + currentX, AppConfig::FieldBorderY - currentY, 0);
 
-		glColor3f(1, 0, 1);
+		glColor3f(color[0], color[1], color[2]);
 
 		glutSolidCube(1);
 		glPopMatrix();
@@ -50,19 +57,19 @@ public:
 
 	Chip* Move(int x, int y)
 	{
-		destinationX += x;
-		if (destinationX < 0 || destinationX >= AppConfig::GameFieldWidth)
-			destinationX = positionX;
-		destinationY += y;
-		if (destinationY < 0 || destinationY > AppConfig::GameFieldWidth)
-			destinationY = positionY;
+		if(!IsMoved)
+		{
+			destinationX += x;
+			if (destinationX < 0 || destinationX >= AppConfig::GameFieldWidth)
+				destinationX = positionX;
+			destinationY += y;
+			if (destinationY < 0 || destinationY >= AppConfig::GameFieldHeight)
+				destinationY = positionY;
 
-		//if (Field->CheckField(this))
-		//{
 			positionX = destinationX;
 			positionY = destinationY;
-		//}
 
+		}
 		return this;
 	}
 
@@ -77,15 +84,35 @@ public:
 	POINT GetPosition()
 	{
 		POINT result;
-		result.x = positionX;
-		result.y = positionY;
+		result.x = currentX;
+		result.y = currentY;
 		return result;
 	}
 
 	bool IsSettedUp()
 	{
-		if (positionY  == AppConfig::GameFieldHeight)
+		if (positionY >= AppConfig::GameFieldHeight - 1)
 			return true;
+		return false;
+	}
+
+	float* Color()
+	{
+		return color;
+	}
+
+	Chip* Color(float c[3])
+	{
+		color[0] = c[0];
+		color[1] = c[1];
+		color[2] = c[2];
+		return this;
+	}
+
+	Chip* DecreaseDestination(int value)
+	{
+		destinationY -= value;
+		return this;
 	}
 private:
 	int positionX;
@@ -95,4 +122,5 @@ private:
 	float currentX;
 	float currentY;
 	int speedKoef;
+	float color[3];
 };
