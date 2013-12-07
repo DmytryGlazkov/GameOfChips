@@ -120,8 +120,8 @@ public:
 		{
 			POINT position = CurrentChip->GetPosition();
 			cells[position.x][position.y] = AppConfig::IsFirstPlayerStep ? 1 : 2;
-
-			if (!IsWins())
+			AppConfig::IsWins = IsWins();
+			if (!AppConfig::IsWins)
 			{
 				AppConfig::IsFirstPlayerStep = !AppConfig::IsFirstPlayerStep;
 

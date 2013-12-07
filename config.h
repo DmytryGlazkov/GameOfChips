@@ -17,6 +17,8 @@ public:
 	static float SecondPlayerColor[3];
 
 	static bool IsFirstPlayerStep;
+
+	static bool IsWins;
 };
 
 int AppConfig::Width  = 800;
@@ -32,3 +34,5 @@ float AppConfig::FirstPlayerColor[3] = {1, 0, 0};
 float AppConfig::SecondPlayerColor[3] = {0, 0, 1};
 
 bool AppConfig::IsFirstPlayerStep = true;
+
+bool AppConfig::IsWins = false;
