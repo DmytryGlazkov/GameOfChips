@@ -21,29 +21,116 @@ public:
 		CurrentChip = (new Chip())->Color(AppConfig::FirstPlayerColor);
 		chips.push_back(CurrentChip);
 
-		AppConfig::IsFirstPlayerStep = false;
+		cells = new int*[width];
+		for (int i = 0; i < width; i++)
+		{
+			cells[i] = new int[height];
+			for (int j = 0; j < height; j++)
+				cells[i][j] = 0;
+		}
 	}
 
 	Chip* CurrentChip;
 
 	bool IsChipSettedUp()
 	{
-		/*if (CurrentChip->GetPosition().y >= AppConfig::GameFieldHeight - 1)
-			return true;
-		return false;*/
 		return CurrentChip->IsSetted;
+	}
+
+	bool IsWins()
+	{
+		int player = AppConfig::IsFirstPlayerStep ? 1 : 0;
+
+		for (int i=0; i<AppConfig::GameFieldWidth; i++)
+		{
+			for (int j=0; j < AppConfig::GameFieldHeight; j++)
+			{
+				if (cells[i][j] == 0) continue;
+				int tek = cells[i][j];
+				int end;
+				int u;
+				end = 0;
+				for (int k = j; k < j + 5; k++)
+				{
+					if ((k == AppConfig::GameFieldHeight) || (cells[i][k] != tek))
+					{
+						break;
+					}
+					end++;
+				}
+				if (end >= 4)
+				{
+					return true;
+				}
+
+				//Смотрим вниз и вправо от текущей клетки
+				end = 0;
+				u=i;
+				for (int k = j; k < j + 5; k++)
+				{
+					if ((k == AppConfig::GameFieldHeight) || (u == AppConfig::GameFieldWidth) || (cells[u][k] != tek))
+					{
+						break;
+					}
+					end++;
+					u++;
+				}
+				if (end >= 4)
+				{
+					return true;
+				}
+
+				//Смотрим вниз и влево от текущей клетки
+				end = 0;
+				u=i;
+				for (int k = j; k > j - 4; k--)
+				{
+					if ((k == -1) || (u == AppConfig::GameFieldWidth) || (cells[u][k] != tek))
+					{
+						break;
+					}
+					end++;
+					u++;
+				}
+				if (end >= 4)
+				{
+					return true;
+				}
+				end = 0;
+				for (int k = i;k < i+4;k++)
+				{
+					if ((k == AppConfig::GameFieldWidth) || (cells[k][j] != tek))
+					{
+						break;
+					}
+					end++;
+				}
+				if (end == 4)
+				{
+					return true;
+				}
+			}
+		}
+		return 0;
 	}
 
 	void Update()
 	{
 		if (IsChipSettedUp())
 		{
-			CurrentChip = (new Chip())->Color(AppConfig::IsFirstPlayerStep ? AppConfig::FirstPlayerColor :   AppConfig::SecondPlayerColor);
-			chips.push_back(CurrentChip);
+			POINT position = CurrentChip->GetPosition();
+			cells[position.x][position.y] = AppConfig::IsFirstPlayerStep ? 1 : 2;
 
-			AppConfig::IsFirstPlayerStep = !AppConfig::IsFirstPlayerStep;
+			if (!IsWins())
+			{
+				AppConfig::IsFirstPlayerStep = !AppConfig::IsFirstPlayerStep;
+
+				CurrentChip = (new Chip())->Color(AppConfig::IsFirstPlayerStep ? AppConfig::FirstPlayerColor :   AppConfig::SecondPlayerColor);
+				chips.push_back(CurrentChip);
+			}
 		}
-		cout << CurrentChip->GetPosition().y;
+
+
 	}
 
 	void DrawField()
@@ -87,41 +174,7 @@ public:
 			glVertex3f(0, -1.1, 0);
 		glEnd();
 		glPopMatrix();
-		
 
-		/*glLoadIdentity();
-		glTranslatef(-(AppConfig::GameFieldWidth) / 2, 0, -10);
-
-		glPushMatrix();
-		glColor3f(0, 1, 0);
-		for (int i = 0; i < AppConfig::GameFieldWidth; i++)
-		{
-			glutSolidCube(1);
-			glTranslatef(1, 0, 0);
-		}
-		glPopMatrix();
-
-		glPushMatrix();
-		glTranslatef(0, -(AppConfig::GameFieldHeight) / 2, 0);
-		glColor3f(1, 0, 0);
-		for (int i = 0; i < AppConfig::GameFieldHeight; i++)
-		{
-			glutSolidCube(1);
-			glTranslatef(0, 1, 0);
-		}
-		glPopMatrix();*/
-
-		/*glLoadIdentity();
-		glTranslatef(-(AppConfig::GameFieldWidth) / 2, (AppConfig::GameFieldHeight) / 2, -10);
-
-		glColor3f(0, 0, 1);
-		glutSolidCube(1);*/
-		/*
-		for (int i = 0; i <= AppConfig::GameFieldHeight; i++)
-		{
-			glVertex2f(0, 1 / (float)AppConfig::GameFieldHeight * i);
-			glVertex2f(1, 1 / (float)AppConfig::GameFieldHeight * i);
-		}*/
 		for (int i = 0; i < chips.size(); i++)
 		{
 			chips[i]->Draw();
@@ -153,6 +206,9 @@ private:
 	int width;
 	int height;
 	vector<Chip*> chips;
+	int **cells;
 };
+
+
 
 GameField* Field = new GameField();

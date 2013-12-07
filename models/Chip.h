@@ -49,9 +49,21 @@ public:
 		glPushMatrix();
 		glTranslatef(-AppConfig::FieldBorderX  + currentX, AppConfig::FieldBorderY - currentY, 0);
 
-		glColor3f(color[0], color[1], color[2]);
+		glColor4f(color[0], color[1], color[2], 0.8);
 
 		glutSolidCube(1);
+		glTranslatef(-0.5, -0.5, 0.51);
+
+
+		glColor3f(0, 0, 0);
+		glLineWidth(1);
+		glBegin(GL_LINE_LOOP);
+			glVertex3f(0, 0, 0);
+			glVertex3f(1, 0, 0);
+			glVertex3f(1, 1, 0);
+			glVertex3f(0, 1, 0);
+		glEnd();
+
 		glPopMatrix();
 	}
 
