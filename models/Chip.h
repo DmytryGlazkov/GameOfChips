@@ -14,12 +14,16 @@ public:
 		speedKoef = 5;
 		IsMoved = false;
 		IsSetted = false;
+		alphaDestination = 0;
+		alpha = 0.8;
 	}
 
 	Chip(int x, int y)
 	{
 		positionX = destinationX = currentX = x;
 		positionY = destinationY = currentY = y;
+		alphaDestination = 0;
+		alpha = 0.8;
 	}
 
 	int Bottom;
@@ -42,6 +46,25 @@ public:
 			currentY = destinationY;
 			if (IsMoved)IsSetted = true;
 		}
+
+		if (AppConfig::IsWins)
+		{
+			if (alphaDestination)
+				alpha += (float)1 / 25;
+			else
+				alpha -= (float)1 / 25;
+
+			if (alpha >= 1)
+			{
+				alpha = 1;
+				alphaDestination = false;
+			}
+			if (alpha <= 0)
+			{
+				alpha = 0;
+				alphaDestination = true;
+			}
+		}
 	}
 
 	void Draw()
@@ -49,7 +72,7 @@ public:
 		glPushMatrix();
 		glTranslatef(-AppConfig::FieldBorderX  + currentX, AppConfig::FieldBorderY - currentY, 0);
 
-		glColor4f(color[0], color[1], color[2], 0.8);
+		glColor4f(color[0], color[1], color[2], alpha);
 
 		glutSolidCube(1);
 		glTranslatef(-0.5, -0.5, 0.51);
@@ -135,4 +158,6 @@ private:
 	float currentY;
 	int speedKoef;
 	float color[3];
+	bool alphaDestination;
+	float alpha;
 };
